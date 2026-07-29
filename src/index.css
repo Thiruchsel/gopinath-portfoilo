@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#03000a] text-gray-200 antialiased overflow-x-hidden;
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+}
+
+/* Glassmorphism custom styles */
+.glass-panel {
+  background: rgba(9, 5, 20, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.12);
+}
+
+.glass-panel-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(15, 8, 32, 0.75);
+  border-color: rgba(192, 132, 252, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.3);
+  transform: translateY(-4px);
+}
+
+.glass-nav {
+  background: rgba(3, 0, 10, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.08);
+}
+
+/* Text glow effects */
+.text-glow {
+  text-shadow: 0 0 20px rgba(192, 132, 252, 0.4);
+}
+
+.text-glow-strong {
+  text-shadow: 0 0 30px rgba(192, 132, 252, 0.75), 0 0 60px rgba(139, 92, 246, 0.3);
+}
+
+/* Box glow effects */
+.glow-box-purple {
+  box-shadow: 0 0 40px -5px rgba(139, 92, 246, 0.25);
+}
+
+.glow-btn {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+  transform: scale(1.02);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #03000a;
+}
+::-webkit-scrollbar-thumb {
+  background: #180d2d;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;
+}
+
+/* Hide AOS animations on initial load if styling not loaded yet */
+[data-aos] {
+  pointer-events: none;
+}
+.aos-animate {
+  pointer-events: auto;
+}
+
+/* Premium Animated Electrical Border */
+.electrical-card {
+  position: relative;
+  z-index: 1;
+  background: #090514 !important;
+  border: 1px solid rgba(139, 92, 246, 0.15) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow: hidden;
+}
+
+.electrical-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 30%,
+    #8b5cf6 45%,
+    #c084fc 50%,
+    #8b5cf6 55%,
+    transparent 70%
+  );
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.electrical-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: #090514;
+  border-radius: inherit;
+  z-index: -1;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.electrical-card:hover {
+  border-color: transparent !important;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(192, 132, 252, 0.15) !important;
+  transform: translateY(-4px) scale(1.01);
+}
+
+.electrical-card:hover::before {
+  opacity: 1;
+  animation: rotate-border 3s linear infinite;
+}
+
+.electrical-card:hover::after {
+  background: #0d081d;
+}
+
+@keyframes rotate-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Lenis smooth scroll styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Stagger entrance animation for skill cards */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skill-card-animate {
+  opacity: 0;
+  animation: cardFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
