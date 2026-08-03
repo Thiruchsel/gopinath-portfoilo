@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { gsap } from 'gsap';
@@ -13,14 +13,11 @@ import Experience from './components/Experience';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import SplashCursor from './components/SplashCursor';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [scrolledPastHero, setScrolledPastHero] = useState(false);
-
   useEffect(() => {
     // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
@@ -56,7 +53,7 @@ function App() {
         } else {
           const element = document.querySelector(href);
           if (element) {
-            lenis.scrollTo(element, { offset: 0, duration: 1.2 });
+            lenis.scrollTo(element, { offset: -60, duration: 1.2 });
           }
         }
       }
@@ -75,47 +72,7 @@ function App() {
       offset: 50,
     });
 
-    // GSAP GTA 6 Style Cinematic Pin & Zoom Reveal
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.hero-section',
-          start: 'top top',
-          end: '+=100%', // Scroll depth equal to viewport height
-          scrub: 0.5,    // Smooth scrubbing duration
-          pin: true,     // Pin the hero section
-          pinSpacing: true,
-          // Toggle fluid cursor trail when scrolling past the landing page
-          onLeave: () => setScrolledPastHero(true),
-          onEnterBack: () => setScrolledPastHero(false),
-        }
-      });
-
-      // Scale up the content (flying into viewport/behind user) and fade it out
-      tl.to('.hero-content-wrapper', {
-        scale: 1.7,
-        opacity: 0,
-        y: -60,
-        ease: 'power2.out',
-      }, 0);
-
-      // Scale up the WebGL Lightfall tunnel to feel like entering it
-      tl.to('.hero-bg-wrapper', {
-        scale: 1.35,
-        opacity: 0.15,
-        ease: 'power2.out',
-      }, 0);
-
-      // Instantly fade the scroll indicator
-      tl.to('.hero-scroll-indicator', {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.15,
-        ease: 'power1.out',
-      }, 0);
-    });
-
-    // Force ScrollTrigger to calculate correct layout pinning offsets after mounting
+    // Force ScrollTrigger to calculate correct layout offsets after mounting
     ScrollTrigger.refresh();
 
     // GSAP Magnetic Hover Effect for elements with class '.magnetic'
@@ -159,7 +116,6 @@ function App() {
     });
 
     return () => {
-      ctx.revert(); // Cleanup GSAP ScrollTrigger instance on unmount
       magnetCleanups.forEach((cleanup) => cleanup()); // Cleanup magnetic event listeners
       lenis.destroy();
       gsap.ticker.remove(tickerFn);
@@ -175,9 +131,6 @@ function App() {
       
       {/* Main Layout Wrapping */}
       <div className="relative z-10">
-        {/* Dynamic Splash Cursor Fluid Simulation (renders after scrolling past hero) */}
-        {scrolledPastHero && <SplashCursor RAINBOW_MODE={false} COLOR="#c084fc" />}
-
         {/* Fixed Navbar */}
         <Header />
 
