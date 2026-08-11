@@ -30,14 +30,14 @@ export default function Experience() {
 
   const experiences = [
     {
-      role: "Co-Founder & Managing Director (MD)",
+      role: "Managing operations & Photography & Viedography",
       company: "Best Grade Photography Studio",
       location: "Chennai",
       duration: "Jan 2024 - Present",
       type: "Full-Time / Partner",
       description: "Leading overall studio operations and photography teams while directing creative shoots and storytelling production.",
       achievements: [
-        "Managing Director: Oversee client bookings, manage shoots, handle client relations, coordinate studio operations, and lead the photography team.",
+        "Managing Shoots: Oversee client bookings, manage shoots, handle client relations, coordinate studio operations, and lead the photography team.",
         "Videography: Conceptualize and shoot creative storytelling videographies, promotional shoots, and commercial projects."
       ],
       tags: ["Studio Operations", "Creative Videography", "Client Relations", "Team Leadership", "Project Management"]
